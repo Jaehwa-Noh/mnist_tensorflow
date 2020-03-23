@@ -5,16 +5,24 @@ mnist = tf.keras.datasets.mnist
 
 (train_image, train_label), (test_image, test_label) = mnist.load_data()
 
-plt.figure(figsize=(25/2.54, 18/2.54))
-for i in range(25):
-    plt.subplot(5, 5, i+1)
-    plt.xticks([])
-    plt.yticks([])
-    plt.grid(False)
-    plt.imshow(train_image[i])
-    plt.xlabel(train_label[i])
+train_image = (train_image > 10).astype(int)
+test_image = (test_image > 10).astype(int)
 
-plt.show()
+
+print(train_image[0])
+
+
+
+# plt.figure(figsize=(25/2.54, 18/2.54))
+# for i in range(25):
+#     plt.subplot(5, 5, i+1)
+#     plt.xticks([])
+#     plt.yticks([])
+#     plt.grid(False)
+#     plt.imshow(train_image[i])
+#     plt.xlabel(train_label[i])
+#
+# plt.show()
 
 
 
