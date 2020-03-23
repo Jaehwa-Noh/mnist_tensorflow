@@ -1,2 +1,7 @@
 # mnist_tensorflow
 This is simple mnist tensorflow A.I.
+
+```
+네이버 블로그: https://blog.naver.com/shwotjd14/221866552463
+Google Blog: https://shwoghk14.blogspot.com/search/label/Tensorflow
+```
