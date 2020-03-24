@@ -8,6 +8,8 @@ mnist = tf.keras.datasets.mnist
 train_image = (train_image > 10).astype(int)
 test_image = (test_image > 10).astype(int)
 
+print(len(train_image))
+print(len(test_image))
 
 
 # plt.figure(figsize=(25/2.54, 18/2.54))
