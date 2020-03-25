@@ -1,5 +1,7 @@
 import tensorflow as tf
 import matplotlib.pyplot as plt
+import numpy as np
+
 
 from mnist_util import split_train_validation
 
@@ -21,18 +23,33 @@ model = tf.keras.Sequential([
 ])
 
 
-model.summary()
+# model.summary()
 
 
 
+model.compile(
+    loss = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+    metrics=['accuracy']
+)
+
+
+
+
+
+predict = model(test_image[:5])
+predict_list = np.argmax(tf.nn.softmax(predict), -1)
+
+
+
+# show_number = 5
 # plt.figure(figsize=(25/2.54, 18/2.54))
-# for i in range(25):
-#     plt.subplot(5, 5, i+1)
+# for i in range(show_number):
+#     plt.subplot(1, 5, i+1)
 #     plt.xticks([])
 #     plt.yticks([])
 #     plt.grid(False)
-#     plt.imshow(train_image[i])
-#     plt.xlabel(train_label[i])
+#     plt.imshow(test_image[i])
+#     plt.xlabel(predict_list[i])
 #
 # plt.show()
 
