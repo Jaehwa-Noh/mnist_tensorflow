@@ -41,22 +41,25 @@ model.fit(
 )
 
 
-predict = model(test_image[:25])
-predict_list = np.argmax(tf.nn.softmax(predict), -1)
 
-
-show_number = 25
-plt.figure(figsize=(25/2.54, 18/2.54))
-for i in range(show_number):
-    plt.subplot(5, 5, i+1)
-    plt.xticks([])
-    plt.yticks([])
-    plt.grid(False)
-    plt.imshow(test_image[i])
-    plt.xlabel(predict_list[i])
-    plt.ylabel(test_label[i], rotation=0)
-
-plt.show()
+# predict = model(test_image[:25])
+# predict_list = np.argmax(tf.nn.softmax(predict), -1)
+#
+#
+#
+#
+# show_number = 25
+# plt.figure(figsize=(25/2.54, 18/2.54))
+# for i in range(show_number):
+#     plt.subplot(5, 5, i+1)
+#     plt.xticks([])
+#     plt.yticks([])
+#     plt.grid(False)
+#     plt.imshow(test_image[i])
+#     plt.xlabel(predict_list[i])
+#     plt.ylabel(test_label[i], rotation=0)
+#
+# plt.show()
 
 
 
