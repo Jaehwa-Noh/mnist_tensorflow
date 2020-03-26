@@ -28,7 +28,8 @@ def load_real_data(path, number):
         tmp_img_height, tmp_img_width = tmp_img.shape
         if tmp_img_height != 28 and tmp_img_width != 28:
             tmp_img = cv2.resize(tmp_img, (28, 28))
-        print(tmp_img.shape)
+
+            
         pre_treat_img = (tmp_img > 10).astype(int)
         real_data_list.append(pre_treat_img)
 
