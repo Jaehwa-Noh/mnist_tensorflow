@@ -1,9 +1,9 @@
 import tensorflow as tf
 import matplotlib.pyplot as plt
 import numpy as np
+import cv2
 
-
-from mnist_util import split_train_validation
+from mnist_util import split_train_validation, load_real_data
 
 mnist = tf.keras.datasets.mnist
 
@@ -23,7 +23,9 @@ model = tf.keras.Sequential([
 ])
 
 
+
 # model.summary()
+
 
 
 
@@ -46,19 +48,25 @@ model.evaluate(
 )
 
 
-predict = model(test_image[:25])
+real_data = np.asarray(load_real_data('./real_img/', 10))
+
+real_data_label = [2, 3, 7, 6, 3, 9, 0, 5, 8, 9]
+
+predict = model(real_data)
 predict_list = np.argmax(tf.nn.softmax(predict), -1)
 
-show_number = 25
+
+
+show_number = 10
 plt.figure(figsize=(25/2.54, 18/2.54))
 for i in range(show_number):
-    plt.subplot(5, 5, i+1)
+    plt.subplot(2, 5, i+1)
     plt.xticks([])
     plt.yticks([])
     plt.grid(False)
-    plt.imshow(test_image[i])
+    plt.imshow(real_data[i])
     plt.xlabel(predict_list[i])
-    plt.ylabel(test_label[i], rotation=0)
+    plt.ylabel(real_data_label[i], rotation=0)
 
 plt.show()
 
