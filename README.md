@@ -1,5 +1,5 @@
 # mnist_tensorflow
-This is simple mnist tensorflow A.I.
+This is simple mnist dataset tensorflow A.I.
 
 ```
 네이버 블로그: https://blog.naver.com/shwotjd14/221866552463
