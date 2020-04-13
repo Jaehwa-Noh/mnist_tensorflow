@@ -1,5 +1,6 @@
 import cv2
 
+
 def split_train_validation(train_image, train_label, percent):
     split_percent = int(len(train_image) * percent / 100)
 
@@ -29,10 +30,11 @@ def load_real_data(path, number):
         if tmp_img_height != 28 and tmp_img_width != 28:
             tmp_img = cv2.resize(tmp_img, (28, 28))
 
-            
+
         pre_treat_img = (tmp_img > 10).astype(int)
         real_data_list.append(pre_treat_img)
 
     return real_data_list
+
 
 #
