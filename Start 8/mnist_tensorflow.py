@@ -44,7 +44,8 @@ test_image = (test_image > 10).astype(int)
 
 
 train_image, train_label, validation_image, validation_label\
-= split_train_validation(train_image, train_label, 80)
+= split_train_validation(train_image, train_label, 100)
+
 
 
 model = tf.keras.Sequential([
@@ -68,7 +69,7 @@ model.compile(
 model.fit(
     train_image, train_label,
     epochs=5,
-    validation_data=(validation_image, validation_label),
+    
     verbose=1
 )
 
@@ -85,7 +86,6 @@ real_data_label = [2, 3, 7, 6, 3, 9, 0, 5, 8, 9]
 predict = model(real_data)
 predict = tf.math.softmax(predict)
 predict_list = np.argmax(predict, -1)
-
 
 
 
