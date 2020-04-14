@@ -68,7 +68,7 @@ model.compile(
 
 model.fit(
     train_image, train_label,
-    epochs=50,
+    epochs=200,
     verbose=1
 )
 
