@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import cv2
 
+tf.config.experimental.set_visible_devices([], 'GPU')
+
 from mnist_util import split_train_validation, load_real_data
 
 def plot_image(predictions_array, true_label, img, predicted_label):
@@ -47,6 +49,8 @@ train_image, train_label, validation_image, validation_label\
 = split_train_validation(train_image, train_label, 100)
 
 
+train_dataset = tf.data.Dataset.from_tensor_slices((train_image, train_label))
+
 
 model = tf.keras.Sequential([
     tf.keras.layers.Flatten(input_shape=(28, 28)),
@@ -67,8 +71,8 @@ model.compile(
 
 
 model.fit(
-    train_image, train_label,
-    epochs=200,
+    train_dataset.batch(64),
+    epochs=50,
     verbose=1
 )
 
