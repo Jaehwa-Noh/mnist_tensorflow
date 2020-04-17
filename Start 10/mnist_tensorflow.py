@@ -71,7 +71,7 @@ model.compile(
 
 
 model.fit(
-    train_dataset.batch(32),
+    train_dataset.batch(128),
     epochs=50,
     verbose=1
 )
