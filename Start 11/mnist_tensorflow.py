@@ -63,16 +63,16 @@ model = tf.keras.Sequential([
 
 
 
-
 model.compile(
     loss = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
     metrics=['accuracy']
 )
 
+epochs = 50
 
 model.fit(
-    train_dataset.batch(512),
-    epochs=50,
+    train_dataset.shuffle(int(len(train_image)+500)).batch(32),
+    epochs=epochs,
     verbose=1
 )
 
@@ -95,7 +95,7 @@ predict_list = np.argmax(predict, -1)
 num_rows = 4
 num_cols = 3
 num_images = 10
-plt.figure(figsize=(2 * 2 * num_cols, 2 * num_rows))
+plt.figure('epochs: '+str(epochs), figsize=(2 * 2 * num_cols, 2 * num_rows))
 for i in range(num_images):
     plt.subplot(num_rows, 2 * num_cols, 2 * i + 1)
     plot_image(predict[i], real_data_label[i], real_data[i], predict_list[i])
