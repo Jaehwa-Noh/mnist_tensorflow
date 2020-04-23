@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import cv2
 
-tf.config.experimental.set_visible_devices([], 'GPU')
+# tf.config.experimental.set_visible_devices([], 'GPU')
 
 from mnist_util import split_train_validation, load_real_data
 
@@ -54,6 +54,14 @@ train_dataset = tf.data.Dataset.from_tensor_slices((train_image, train_label))
 
 model = tf.keras.Sequential([
     tf.keras.layers.Flatten(input_shape=(28, 28)),
+    tf.keras.layers.Dense(512, activation='relu'),
+    tf.keras.layers.Dropout(0.02),
+    tf.keras.layers.Dense(254, activation='relu'),
+    tf.keras.layers.Dropout(0.02),
+    tf.keras.layers.Dense(128, activation='relu'),
+    tf.keras.layers.Dropout(0.01),
+    tf.keras.layers.Dense(64, activation='relu'),
+    tf.keras.layers.Dense(32, activation='sigmoid'),
     tf.keras.layers.Dense(10)
 ])
 
@@ -71,7 +79,7 @@ model.compile(
 epochs = 50
 
 model.fit(
-    train_dataset.shuffle(int(len(train_image)+500)).batch(32),
+    train_dataset.shuffle(int(len(train_image)+500)).batch(128),
     epochs=epochs,
     verbose=1
 )
