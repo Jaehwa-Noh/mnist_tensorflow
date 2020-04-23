@@ -31,7 +31,7 @@ def load_real_data(path, number):
             tmp_img = cv2.resize(tmp_img, (28, 28))
 
 
-        pre_treat_img = (tmp_img > 10).astype(int)
+        pre_treat_img = (tmp_img > 100).astype(int)
         real_data_list.append(pre_treat_img)
 
     return real_data_list

@@ -47,8 +47,8 @@ mnist = tf.keras.datasets.mnist
 
 (train_image, train_label), (test_image, test_label) = mnist.load_data()
 
-train_image = (train_image > 10).astype(int)
-test_image = (test_image > 10).astype(int)
+train_image = (train_image > 100).astype(int)
+test_image = (test_image > 100).astype(int)
 
 
 train_image, train_label, validation_image, validation_label\
@@ -61,14 +61,14 @@ train_dataset = tf.data.Dataset.from_tensor_slices((train_image, train_label))
 model = tf.keras.Sequential([
     tf.keras.layers.Flatten(input_shape=(28, 28)),
     tf.keras.layers.Dense(512, activation='relu'),
-    tf.keras.layers.Dropout(0.02),
+    tf.keras.layers.BatchNormalization(),
+    tf.keras.layers.Dropout(0.02, seed=1),
     tf.keras.layers.Dense(254, activation='relu'),
-    tf.keras.layers.Dropout(0.02),
+    tf.keras.layers.Dropout(0.02, seed=1),
     tf.keras.layers.Dense(128, activation='relu'),
-    tf.keras.layers.Dropout(0.01),
+    tf.keras.layers.Dropout(0.01, seed=1),
     tf.keras.layers.Dense(64, activation='relu'),
     tf.keras.layers.Dense(32, activation='sigmoid'),
-    tf.keras.layers.BatchNormalization(),
     tf.keras.layers.Dense(10)
 ])
 
@@ -83,10 +83,10 @@ model.compile(
     metrics=['accuracy']
 )
 
-epochs = 17
+epochs = 21
 
 model.fit(
-    train_dataset.shuffle(int(len(train_image)+500)).batch(256),
+    train_dataset.shuffle(int(len(train_image)+500), seed=1).batch(256),
     epochs=epochs,
     verbose=1
 )
