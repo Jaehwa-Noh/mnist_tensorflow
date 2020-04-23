@@ -2,10 +2,16 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 import numpy as np
 import cv2
+import random
 
 # tf.config.experimental.set_visible_devices([], 'GPU')
 
 from mnist_util import split_train_validation, load_real_data
+
+
+np.random.seed(1)
+random.seed(1)
+tf.random.set_seed(1)
 
 def plot_image(predictions_array, true_label, img, predicted_label):
     plt.grid(False)
@@ -62,6 +68,7 @@ model = tf.keras.Sequential([
     tf.keras.layers.Dropout(0.01),
     tf.keras.layers.Dense(64, activation='relu'),
     tf.keras.layers.Dense(32, activation='sigmoid'),
+    tf.keras.layers.BatchNormalization(),
     tf.keras.layers.Dense(10)
 ])
 
@@ -76,10 +83,10 @@ model.compile(
     metrics=['accuracy']
 )
 
-epochs = 50
+epochs = 17
 
 model.fit(
-    train_dataset.shuffle(int(len(train_image)+500)).batch(128),
+    train_dataset.shuffle(int(len(train_image)+500)).batch(256),
     epochs=epochs,
     verbose=1
 )
