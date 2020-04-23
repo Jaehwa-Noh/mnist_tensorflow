@@ -83,7 +83,7 @@ model.compile(
     metrics=['accuracy']
 )
 
-epochs = 21
+epochs = 10
 
 model.fit(
     train_dataset.shuffle(int(len(train_image)+500), seed=1).batch(256),
